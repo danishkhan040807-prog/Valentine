@@ -3,10 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day</title>
+    <title>Happy Valentine's Day!</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffcccb;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            font-family: Arial, sans-serif;
+            color: #d50000;
+            text-align: center;
+        }
+        .button {
+            padding: 20px 40px;
+            font-size: 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 20px;
+        }
+        .yes {
+            background-color: #28a745;
+            color: white;
+            transition: transform 0.2s;
+        }
+        .no {
+            background-color: #dc3545;
+            color: white;
+            position: relative;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff0;
+            animation: fall 3s infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Manohar and Ashita my girlies will you be my valentine?</h1>
-    <p>Happy Valentine's Day!</p>
+    <h1>Will You Be My Valentine?</h1>
+    <button class="button yes">Yes</button>
+    <button class="button no">No</button>
+    <script>
+        // Confetti effect
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            document.body.appendChild(confetti);
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        }
+
+        // Generate confetti
+        setInterval(createConfetti, 500);
+
+        // Growing Yes button
+        const yesButton = document.querySelector('.yes');
+        yesButton.addEventListener('mouseover', () => {
+            yesButton.style.transform = 'scale(1.2)';
+        });
+        yesButton.addEventListener('mouseout', () => {
+            yesButton.style.transform = 'scale(1)';
+        });
+
+        // Evasive No button
+        const noButton = document.querySelector('.no');
+        noButton.addEventListener('mouseover', () => {
+            const randomX = Math.random() * (window.innerWidth - noButton.offsetWidth);
+            const randomY = Math.random() * (window.innerHeight - noButton.offsetHeight);
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        });
+    </script>
 </body>
 </html>
